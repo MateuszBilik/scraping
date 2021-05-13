@@ -1,1 +1,13 @@
-{ "properties": [ ] }
+{
+  "properties": [
+    {
+      "name": "driver",
+      "type": "java.lang.String",
+      "description": "Description for driver."
+    },
+    {
+      "name": "location.driver",
+      "type": "java.lang.String",
+      "description": "Description for location.driver."
+    }
+  ] }

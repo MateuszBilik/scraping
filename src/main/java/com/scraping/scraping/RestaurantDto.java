@@ -6,7 +6,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class RestaurantDto {
 
     private String name;
@@ -15,4 +14,15 @@ public class RestaurantDto {
     private String workingHours;
     private String address;
     private String web;
+
+    @Override
+    public String toString() {
+        return  "\nname='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", timeToDelivery='" + timeToDelivery + '\'' +
+                ", workingHours='" + workingHours + '\'' +
+                ", address='" + address + '\'' +
+                ", web='" + web + '\'' +
+                '}';
+    }
 }

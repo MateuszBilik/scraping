@@ -11,11 +11,11 @@ import java.util.List;
 
 @RestController
 @Slf4j
-public class WebController {
+public class ScrapingController {
 
     private final ScrapingService scrapingService;
 
-    public WebController(ScrapingService scrapingService) {
+    public ScrapingController(ScrapingService scrapingService) {
         this.scrapingService = scrapingService;
     }
 
