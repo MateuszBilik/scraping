@@ -22,8 +22,7 @@ public class SaveData {
     }
 
     protected void save(String text) {
-        try (
-                Writer writer = new BufferedWriter(new FileWriter(FILE, true))) {
+        try (Writer writer = new BufferedWriter(new FileWriter(FILE, true))) {
             writer.append(text);
         } catch (IOException e) {
             log.warn("Save: " + e.getMessage());
