@@ -26,7 +26,7 @@ public class ScrapingController {
             return scrapingService.getRestaurants(web);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-            log.warn("Problem with your website" + web);
+            log.warn("Problem with website :" + web);
         }
         return new ArrayList<>();
     }

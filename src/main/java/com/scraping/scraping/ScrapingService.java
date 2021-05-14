@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -40,8 +42,9 @@ public class ScrapingService {
 
     private List<RestaurantDto> getListOfRestaurants(WebDriver driver, Elements body) throws InterruptedException {
         List<RestaurantDto> restaurants = new ArrayList<>();
+        WebDriverWait wait = new WebDriverWait(driver,5);
         for (Element e : body.select("div.restaurant-repeater")) {
-            RestaurantDto rest = createRestaurantDto(driver, e);
+            RestaurantDto rest = createRestaurantDto(driver, e, wait);
             log.info("Create restaurant: " + rest.getName() + " address: " + rest.getAddress());
             restaurants.add(rest);
         }
@@ -58,13 +61,13 @@ public class ScrapingService {
         return driver;
     }
 
-    private RestaurantDto createRestaurantDto(WebDriver driver, Element e) throws InterruptedException {
+    private RestaurantDto createRestaurantDto(WebDriver driver, Element e, WebDriverWait wait) throws InterruptedException {
         RestaurantDto rest = new RestaurantDto();
         rest.setName(e.select("img").attr("alt"));
         rest.setWeb("https://glodny.pl" + e.select("div.left").select("a").attr("href"));
 
         driver.get(rest.getWeb());
-        Thread.sleep(500);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("details")));
         Document document = Jsoup.parse(driver.getPageSource());
         Elements data = document.select("div.details");
         try {
